@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MarkdownView.Samples.MenuPage">
+	<ListView ItemsSource="{Binding Items}" ItemSelected="Handle_ItemSelected">
+        <ListView.Header>
+
+            <StackLayout Margin="0,30,0,0">
+            </StackLayout>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label VerticalTextAlignment="Center" Text="{Binding Title}" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
