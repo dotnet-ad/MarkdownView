@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Net;
 using System.IO;
+using System.Linq;
 
 namespace MarkdownView.Samples
 {
@@ -12,6 +13,7 @@ namespace MarkdownView.Samples
             InitializeComponent();
             var mdView = new Markdown.MarkdownView();
             mdView.Markdown = embedded;
+            mdView.RelativeUrlHost = "";
             this.Content = new ScrollView() { Content = mdView };
 
 
@@ -19,9 +21,16 @@ namespace MarkdownView.Samples
                 if(arg == "")
                 {
                     mdView.Markdown = embedded;
+                    mdView.RelativeUrlHost = "";
                 }
                 else
                 {
+                    var urlSplits = arg.Split('/');
+                    var ghUser = urlSplits.ElementAtOrDefault(3);
+                    var ghRepo = urlSplits.ElementAtOrDefault(4);
+                    var ghBranch = urlSplits.ElementAtOrDefault(5);
+                    mdView.RelativeUrlHost = $"https://raw.githubusercontent.com/{ghUser}/{ghRepo}/{ghBranch}";
+
                     var req = WebRequest.Create(arg);
                     var res = await req.GetResponseAsync();
                     using (var stream = res.GetResponseStream())
