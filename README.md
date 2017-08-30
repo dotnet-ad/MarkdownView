@@ -16,8 +16,6 @@ This will produce a more reactive user interface, at the cost of rendering funct
 
 Available on NuGet
 
-**NET Standard 1.4, Xamarin.iOS, Xamarin.Android, UWP**
-
 [![NuGet](https://img.shields.io/nuget/v/Microcharts.svg?label=NuGet)](https://www.nuget.org/packages/Microcharts/)
 
 ## Quickstart
