@@ -16,7 +16,7 @@ This will produce a more reactive user interface, at the cost of rendering funct
 
 Available on NuGet
 
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.svg?label=NuGet)](https://www.nuget.org/packages/Microcharts/)
+[![NuGet](https://img.shields.io/nuget/v/Xam.Forms.MarkdownView.svg?label=NuGet)](https://www.nuget.org/packages/Xam.Forms.MarkdownView/)
 
 ## Quickstart
 
