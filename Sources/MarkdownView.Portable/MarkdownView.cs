@@ -1,4 +1,4 @@
-﻿namespace Markdown
+﻿namespace Xam.Forms.Markdown
 {
     using System.Linq;
     using Markdig.Syntax;
@@ -7,13 +7,12 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
+    using Extensions;
 
     public class MarkdownView : ContentView
     {
-        public MarkdownView()
-        {
-            this.Padding = 10;
-        }
+        public Action<string> NavigateToLink { get; set; } = (s) => Device.OpenUri(new Uri(s));
 
         public static MarkdownTheme Global = new LightMarkdownTheme();
 
@@ -53,9 +52,16 @@
 
         private StackLayout stack;
 
+        private List<KeyValuePair<string, string>> links = new List<KeyValuePair<string, string>>();
+
         private void RenderMarkdown()
         {
-            stack = new StackLayout();
+            stack = new StackLayout()
+            {
+                Spacing = this.Theme.Margin,
+            };
+
+            this.Padding = this.Theme.Margin;
 
             this.BackgroundColor = this.Theme.BackgroundColor;
 
@@ -74,6 +80,39 @@
             {
                 this.Render(block);
             }
+        }
+
+        private void AttachLinks(View view)
+        {
+            if (links.Any())
+            {
+                var blockLinks = links;
+                view.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(async () => 
+                    {
+                        try
+                        {
+                            if (blockLinks.Count > 1)
+                            {
+                                var result = await Application.Current.MainPage.DisplayActionSheet("Open link", "Cancel", null, blockLinks.Select(x => x.Key).ToArray());
+                                var link = blockLinks.FirstOrDefault(x => x.Key == result);
+                                NavigateToLink(link.Value);
+                            }
+                            else
+                            {
+                                NavigateToLink(blockLinks.First().Value);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }),
+                });
+
+                links = new List<KeyValuePair<string, string>>();
+            } 
         }
 
         #region Rendering blocks
@@ -162,14 +201,17 @@
         {
             var initialStack = this.stack;
 
-            this.stack = new StackLayout();
+            this.stack = new StackLayout()
+            {
+                Spacing = this.Theme.Margin,
+            };
 
             this.Render(block.AsEnumerable());
 
             var horizontalStack = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
-                Margin = new Thickness(listScope * 10, 0, 0, 0),
+                Margin = new Thickness(listScope * this.Theme.Margin, 0, 0, 0),
             };
 
             View bullet;
@@ -235,18 +277,27 @@
 
             var foregroundColor = isQuoted ? this.Theme.Quote.ForegroundColor : style.ForegroundColor;
 
-            stack.Children.Add(new Label
+            var label = new Label
             {
                 FormattedText = CreateFormatted(block.Inline, style.FontFamily, style.Attributes, foregroundColor, style.BackgroundColor, style.FontSize),
-            });
+            };
+
+            AttachLinks(label);
 
             if (style.BorderSize > 0)
             {
-                stack.Children.Add(new BoxView
+                var headingStack = new StackLayout();
+                headingStack.Children.Add(label);
+                headingStack.Children.Add(new BoxView
                 {
                     HeightRequest = style.BorderSize,
                     BackgroundColor = style.BorderColor,
                 });
+                stack.Children.Add(headingStack);
+            }
+            else
+            {
+                stack.Children.Add(label);
             }
         }
 
@@ -258,6 +309,7 @@
             {
                 FormattedText = CreateFormatted(block.Inline, style.FontFamily, style.Attributes, foregroundColor, style.BackgroundColor, style.FontSize),
             };
+            AttachLinks(label);
             this.stack.Children.Add(label);
         }
 
@@ -272,7 +324,10 @@
             var initialStack = this.stack;
 
             this.isQuoted = true;
-            this.stack = new StackLayout();
+            this.stack = new StackLayout()
+            {
+                Spacing = this.Theme.Margin,
+            };
 
             var style = this.Theme.Quote;
 
@@ -308,15 +363,17 @@
             var style = this.Theme.Code;
             var label = new Label
             {
-                Margin = 10,
                 TextColor = style.ForegroundColor,
                 FontAttributes = style.Attributes,
                 FontFamily = style.FontFamily,
                 FontSize = style.FontSize,
                 Text = string.Join(Environment.NewLine, block.Lines),
             };
-            stack.Children.Add(new ContentView()
+            stack.Children.Add(new Frame()
             {
+                CornerRadius = 3,
+                HasShadow = false,
+                Padding = this.Theme.Margin,
                 BackgroundColor = style.BackgroundColor,
                 Content = label
             });
@@ -367,29 +424,47 @@
 
                 case LinkInline link:
 
+                    var url = link.Url;
+
+                    if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                    {
+                        url = $"{this.RelativeUrlHost?.TrimEnd('/')}/{url.TrimStart('/')}";
+                    }
+
                     if(link.IsImage)
                     {
-                        var url = link.Url;
+                        var image = new Image();
 
-                        if(!(url.StartsWith("http://") || url.StartsWith("https://")))
+                        if(Path.GetExtension(url) == ".svg")
                         {
-                            url = $"{this.RelativeUrlHost?.TrimEnd('/')}/{url.TrimStart('/')}";
+                            image.RenderSvg(url);
+                        }
+                        else
+                        {
+                            image.Source = url;
                         }
 
-                        queuedViews.Add(new Image()
-                        {
-                            Source = url,
-                        });
+                        queuedViews.Add(image);
                         return new Span[0];
                     }
                     else
                     {
-                        return link.SelectMany(x => CreateSpans(x, family, attributes, this.Theme.Link.ForegroundColor, backgroundColor, size)).ToArray();
+                        var spans = link.SelectMany(x => CreateSpans(x, family, attributes, this.Theme.Link.ForegroundColor, backgroundColor, size)).ToArray();
+                        links.Add(new KeyValuePair<string, string>(string.Join("",spans.Select(x => x.Text)), url));
+                        return spans;
                     }
 
                 case CodeInline code:
                     return new[]
                     {
+                        new Span()
+                        {
+                            Text="\u2002",
+                            FontSize = size,
+                            FontFamily = this.Theme.Code.FontFamily,
+                            ForegroundColor = this.Theme.Code.ForegroundColor,
+                            BackgroundColor = this.Theme.Code.BackgroundColor
+                        },
                         new Span
                         {
                             Text = code.Content,
@@ -398,9 +473,16 @@
                             FontFamily = this.Theme.Code.FontFamily,
                             ForegroundColor = this.Theme.Code.ForegroundColor,
                             BackgroundColor = this.Theme.Code.BackgroundColor
-                        }
+                        },
+                        new Span()
+                        {
+                            Text="\u2002",
+                            FontSize = size,
+                            FontFamily = this.Theme.Code.FontFamily,
+                            ForegroundColor = this.Theme.Code.ForegroundColor,
+                            BackgroundColor = this.Theme.Code.BackgroundColor
+                        },
                     };
-
 
                 default:
                     Debug.WriteLine($"Can't render {inline.GetType()} inlines.");

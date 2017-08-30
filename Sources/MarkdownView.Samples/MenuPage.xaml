@@ -3,7 +3,7 @@
 	<ListView ItemsSource="{Binding Items}" ItemSelected="Handle_ItemSelected">
         <ListView.Header>
                 
-            <StackLayout Margin="0,50,0,0">
+            <StackLayout Padding="0,50,0,0">
                 <Switch Toggled="Handle_Toggled" />
             </StackLayout>
         </ListView.Header>

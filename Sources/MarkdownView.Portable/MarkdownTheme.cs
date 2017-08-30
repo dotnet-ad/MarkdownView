@@ -1,5 +1,5 @@
 ﻿
-namespace Markdown
+namespace Xam.Forms.Markdown
 {
     using Xamarin.Forms;
 
@@ -110,7 +110,9 @@ namespace Markdown
 
         public MarkdownStyle Link { get; set; }
 
-        public MarkdownStyle Code { get; set; } 
+        public MarkdownStyle Code { get; set; }
+
+        public float Margin { get; set; } = 10;
     }
 
     public class LightMarkdownTheme : MarkdownTheme

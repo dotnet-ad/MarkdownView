@@ -22,6 +22,7 @@ namespace MarkdownView.Samples
         public Item[] Items { get; } =
         {
             new Item("Embedded", ""),
+            new Item("MarkdownView", "https://raw.githubusercontent.com/aloisdeniel/MarkdownView/master/README.md"),
             new Item("Markdig", "https://raw.githubusercontent.com/lunet-io/markdig/master/readme.md"),
             new Item("Xamarin.Forms", "https://raw.githubusercontent.com/xamarin/Xamarin.Forms/master/README.md"),
         };
