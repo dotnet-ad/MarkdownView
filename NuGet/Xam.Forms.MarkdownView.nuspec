@@ -21,6 +21,6 @@
   </metadata>
    <files>
      <!-- PCL -->
-     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable45-net45+win8+wpa81\Xam.Forms..dll"/>
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable-net45+win8+wpa81+wp8\Xam.Forms..dll"/>
    </files>
 </package>
