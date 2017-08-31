@@ -23,9 +23,9 @@
   </metadata>
    <files>
      <!-- PCL -->
-     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable-net45+win8+wpa81+wp8\Xam.Forms.MarkdownView.dll"/>
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\Xam.Forms.MarkdownView.dll" target="lib\portable-net45+win8+wpa81+wp8\Xam.Forms.MarkdownView.dll"/>
 
      <!-- NETStandard -->
-     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\netstandard1.0\Xam.Forms.MarkdownView.dll"/>
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\Xam.Forms.MarkdownView.dll" target="lib\netstandard1.0\Xam.Forms.MarkdownView.dll"/>
    </files>
 </package>
