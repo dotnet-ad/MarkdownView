@@ -68,6 +68,7 @@ namespace Xam.Forms.Markdown
                 Attributes = FontAttributes.None,
                 BorderSize = 4,
                 FontSize = 12,
+                BackgroundColor = Color.Gray.MultiplyAlpha(.1),
             };
 
             this.Separator = new MarkdownStyle

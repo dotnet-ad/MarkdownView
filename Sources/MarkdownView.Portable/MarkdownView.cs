@@ -333,6 +333,7 @@
                 var horizontalStack = new StackLayout()
                 {
                     Orientation = StackOrientation.Horizontal,
+                    BackgroundColor = this.Theme.Quote.BackgroundColor,
                 };
 
                 horizontalStack.Children.Add(new BoxView()
@@ -346,6 +347,7 @@
             }
             else
             {
+                stack.BackgroundColor = this.Theme.Quote.BackgroundColor;
                 initialStack.Children.Add(this.stack);
             }
 
