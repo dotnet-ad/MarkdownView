@@ -104,10 +104,7 @@
                                 NavigateToLink(blockLinks.First().Value);
                             }
                         }
-                        catch (Exception ex)
-                        {
-
-                        }
+                        catch (Exception) { }
                     }),
                 });
 
