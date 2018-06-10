@@ -10,6 +10,11 @@
 
     public class MarkdownView : ContentView
     {
+        public MarkdownView()
+        {
+            this.Padding = 10;
+        }
+
         public static MarkdownTheme Global = new LightMarkdownTheme();
 
         public string Markdown
@@ -19,6 +24,14 @@
         }
 
         public static readonly BindableProperty MarkdownProperty = BindableProperty.Create(nameof(Markdown), typeof(string), typeof(MarkdownView), null, propertyChanged: OnMarkdownChanged);
+
+        public string RelativeUrlHost
+        {
+            get { return (string)GetValue(RelativeUrlHostProperty); }
+            set { SetValue(RelativeUrlHostProperty, value); }
+        }
+
+        public static readonly BindableProperty RelativeUrlHostProperty = BindableProperty.Create(nameof(RelativeUrlHost), typeof(string), typeof(MarkdownView), null, propertyChanged: OnMarkdownChanged);
 
         public MarkdownTheme Theme
         {
@@ -42,14 +55,13 @@
 
         private void RenderMarkdown()
         {
-            var parsed = Markdig.Markdown.Parse(this.Markdown);
+            stack = new StackLayout();
 
-            stack = new StackLayout()
+            if(!string.IsNullOrEmpty(this.Markdown))
             {
-                Margin = 10.0f,
-            };
-
-            this.Render(parsed.AsEnumerable());
+                var parsed = Markdig.Markdown.Parse(this.Markdown);
+                this.Render(parsed.AsEnumerable());
+            }
 
             this.Content = stack;
         }
@@ -90,6 +102,10 @@
 
                 case ThematicBreakBlock thematicBreak:
                     Render(thematicBreak);
+                    break;
+
+                case HtmlBlock html:
+                    Render(html);
                     break;
 
                 default:
@@ -243,6 +259,11 @@
             this.stack.Children.Add(label);
         }
 
+        private void Render(HtmlBlock block)
+        {
+            // ?
+        }
+
         private void Render(QuoteBlock block)
         {
             var initialIsQuoted = this.isQuoted;
@@ -346,9 +367,16 @@
 
                     if(link.IsImage)
                     {
+                        var url = link.Url;
+
+                        if(!(url.StartsWith("http://") || url.StartsWith("https://")))
+                        {
+                            url = $"{this.RelativeUrlHost?.TrimEnd('/')}/{url.TrimStart('/')}";
+                        }
+
                         queuedViews.Add(new Image()
                         {
-                            Source = link.Url,
+                            Source = url,
                         });
                         return new Span[0];
                     }
