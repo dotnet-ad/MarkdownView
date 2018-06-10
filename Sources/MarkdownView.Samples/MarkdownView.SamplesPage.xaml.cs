@@ -3,6 +3,7 @@ using System.Net;
 using System.IO;
 using System.Linq;
 using Xam.Forms.Markdown;
+using System.Diagnostics;
 
 namespace MarkdownView.Samples
 {
@@ -53,7 +54,7 @@ namespace MarkdownView.Samples
                     }
                     catch (System.Exception ex)
                     {
-
+                        Debug.WriteLine(ex.ToString());
                     }
                 }
             });
