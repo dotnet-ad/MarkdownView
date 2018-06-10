@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Xam.Forms.MarkdownView</id>
+    <version>$version$</version>
+    <title>MarkdownView for Xamarin.Forms</title>
+    <authors>Aloïs Deniel</authors>
+    <owners>Aloïs Deniel</owners>
+    <licenseUrl>https://github.com/aloisdeniel/MarkdownView/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/aloisdeniel/MarkdownView/</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/aloisdeniel/MarkdownView/master/Documentation/Logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Native markdown rendering for Xamarin.Forms.</description>
+    <copyright>Copyright 2017</copyright>
+    <tags>xamarin ios android md markdown native</tags>
+    <dependencies>
+        <dependency id="SkiaSharp.Svg" version="1.59.0" />
+        <dependency id="Xamarin.Forms" version="2.3.4.270" />
+        <dependency id="Markdig" version="0.13.2" />
+    </dependencies>
+  </metadata>
+   <files>
+     <!-- PCL -->
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable45-net45+win8+wpa81\Xam.Forms..dll"/>
+   </files>
+</package>

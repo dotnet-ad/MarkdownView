@@ -88,6 +88,12 @@
       <HintPath>..\packages\Markdig.0.13.2\lib\netstandard1.1\Markdig.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.59.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Svg">
+      <HintPath>..\packages\SkiaSharp.Svg.1.59.0\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -113,6 +119,10 @@
     <ProjectReference Include="..\MarkdownView.Samples\MarkdownView.Samples.csproj">
       <Project>{343F37AF-8929-4C43-90F6-57050218B243}</Project>
       <Name>MarkdownView.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MarkdownView.Portable\Xam.Forms.MarkdownView.csproj">
+      <Project>{17728834-C586-4C2E-A1D7-F2E7AD1E1FBF}</Project>
+      <Name>Xam.Forms.MarkdownView</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
