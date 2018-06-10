@@ -8,7 +8,11 @@ namespace MarkdownView.Samples
         {
             InitializeComponent();
 
-            MainPage = new MarkdownView_SamplesPage();
+            MainPage = new MasterDetailPage()
+            {
+                Master = new MenuPage() { Title = "Menu"},
+                Detail = new MarkdownView_SamplesPage()
+            };
         }
 
         protected override void OnStart()

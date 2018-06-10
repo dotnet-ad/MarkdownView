@@ -130,7 +130,7 @@ namespace Markdown
 
         public static readonly Color DefaultAccentColor = Color.FromHex("#0366d6");
 
-        public static readonly Color DefaultTextColor = Color.Black;
+        public static readonly Color DefaultTextColor = Color.FromHex("#24292e");
 
         public static readonly Color DefaultCodeBackground = Color.FromHex("#f6f8fa");
 
