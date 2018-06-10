@@ -17,7 +17,7 @@
         <group>
             <dependency id="SkiaSharp.Svg" version="1.59.0" />
             <dependency id="Markdig" version="0.13.2" />
-            <dependency id="Xamarin.Forms" version="2.4.0.266-pre1" />
+            <dependency id="Xamarin.Forms" version="2.4.0.269-pre2" />
         </group>
     </dependencies>
   </metadata>
