@@ -9,35 +9,39 @@
 
     public static class ImageExtensions
     {
-        public static async void RenderSvg(this Image view, string uri)
+        public static void RenderSvg(this Image view, string uri)
         {
             try
             {
                 var req = (HttpWebRequest)WebRequest.Create(uri);
 
                 var svg = new SkiaSharp.Extended.Svg.SKSvg();
-                var res = await req.GetResponseAsync();
-                using (var stream = res.GetResponseStream())
+                req.BeginGetResponse((ar) => 
                 {
-                    if (stream != null)
+                    var res = (ar.AsyncState as HttpWebRequest).EndGetResponse(ar) as HttpWebResponse;
+                    using (var stream = res.GetResponseStream())
                     {
-                        var picture = svg.Load(stream);
-
-                        using (var image = SKImage.FromPicture(picture, picture.CullRect.Size.ToSizeI()))
-                        using (var data = image.Encode(SKEncodedImageFormat.Jpeg, 80))
+                        if (stream != null)
                         {
-                            var ms = new MemoryStream();
+                            var picture = svg.Load(stream);
 
-                            if (data != null && !data.IsEmpty)
+                            using (var image = SKImage.FromPicture(picture, picture.CullRect.Size.ToSizeI()))
+                            using (var data = image.Encode(SKEncodedImageFormat.Jpeg, 80))
                             {
-                                data.SaveTo(ms);
-                                ms.Seek(0, SeekOrigin.Begin);
-                                ms.Position = 0;
-                                view.Source = ImageSource.FromStream(() => ms);
+                                var ms = new MemoryStream();
+
+                                if (data != null && !data.IsEmpty)
+                                {
+                                    data.SaveTo(ms);
+                                    ms.Seek(0, SeekOrigin.Begin);
+                                    ms.Position = 0;
+                                    view.Source = ImageSource.FromStream(() => ms);
+                                }
                             }
                         }
                     }
-                }
+                }, req);
+
             }
             catch (Exception ex)
             {
