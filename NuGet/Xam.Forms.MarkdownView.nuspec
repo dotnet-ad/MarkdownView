@@ -17,11 +17,6 @@
         <group>
             <dependency id="SkiaSharp.Svg" version="1.59.0" />
             <dependency id="Markdig" version="0.13.2" />
-        </group>
-        <group targetFramework="portable-net45+win8+wpa81+wp8">
-            <dependency id="Xamarin.Forms" version="2.3.4.270" />
-        </group>
-        <group targetFramework="netstandard1.0">
             <dependency id="Xamarin.Forms" version="2.4.0.266-pre1" />
         </group>
     </dependencies>
