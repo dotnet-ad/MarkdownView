@@ -30,6 +30,8 @@
 
         private bool isQuoted;
 
+        private List<View> queuedViews = new List<View>();
+
         static void OnMarkdownChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as MarkdownView;
@@ -59,6 +61,8 @@
                 this.Render(block);
             }
         }
+
+        #region Rendering blocks
 
         private void Render(Block block)
         {
@@ -92,6 +96,15 @@
                     Debug.WriteLine($"Can't render {block.GetType()} blocks.");
                     break;
             }
+
+            if(queuedViews.Any())
+            {
+                foreach (var view in queuedViews)
+                {
+                    this.stack.Children.Add(view);
+                }
+                queuedViews.Clear();
+            }
         }
 
         private int listScope;
@@ -117,10 +130,10 @@
             for (int i = 0; i < block.Count(); i++)
             {
                 var item = block.ElementAt(i);
-          
-                if(item is ListItemBlock itemBlock)
+
+                if (item is ListItemBlock itemBlock)
                 {
-                    this.Render(block, i+1, itemBlock);
+                    this.Render(block, i + 1, itemBlock);
                 }
             }
 
@@ -151,7 +164,7 @@
                     FontSize = this.Theme.Paragraph.FontSize,
                     TextColor = this.Theme.Paragraph.ForegroundColor,
                     VerticalOptions = LayoutOptions.Start,
-                    HorizontalOptions= LayoutOptions.End,
+                    HorizontalOptions = LayoutOptions.End,
                 };
             }
             else
@@ -209,13 +222,13 @@
                 FormattedText = CreateFormatted(block.Inline, style.FontFamily, style.Attributes, foregroundColor, style.BackgroundColor, style.FontSize),
             });
 
-            if(style.BorderSize > 0)
+            if (style.BorderSize > 0)
             {
                 stack.Children.Add(new BoxView
                 {
                     HeightRequest = style.BorderSize,
                     BackgroundColor = style.BorderColor,
-                }); 
+                });
             }
         }
 
@@ -239,8 +252,8 @@
             this.stack = new StackLayout();
 
             var style = this.Theme.Quote;
-           
-            if(style.BorderSize > 0)
+
+            if (style.BorderSize > 0)
             {
                 var horizontalStack = new StackLayout()
                 {
@@ -262,7 +275,7 @@
             }
 
             this.Render(block.AsEnumerable());
-          
+
             this.isQuoted = initialIsQuoted;
             this.stack = initialStack;
         }
@@ -278,11 +291,11 @@
                 FontFamily = style.FontFamily,
                 FontSize = style.FontSize,
                 Text = string.Join(Environment.NewLine, block.Lines),
-            }; 
+            };
             stack.Children.Add(new ContentView()
             {
                 BackgroundColor = style.BackgroundColor,
-                Content = label 
+                Content = label
             });
         }
 
@@ -293,7 +306,7 @@
             foreach (var inline in inlines)
             {
                 var spans = CreateSpans(inline, family, attributes, foregroundColor, backgroundColor, size);
-                if(spans != null)
+                if (spans != null)
                 {
                     foreach (var span in spans)
                     {
@@ -314,12 +327,12 @@
                     {
                         new Span
                         {
-                            Text = literal.Content.Text.Substring(literal.Content.Start, literal.Content.Length), 
-                            FontAttributes = attributes, 
+                            Text = literal.Content.Text.Substring(literal.Content.Start, literal.Content.Length),
+                            FontAttributes = attributes,
                             ForegroundColor = foregroundColor,
                             BackgroundColor = backgroundColor,
                             FontSize = size,
-                        } 
+                        }
                     };
 
                 case EmphasisInline emphasis:
@@ -330,10 +343,22 @@
                     return new[] { new Span { Text = "\n" } };
 
                 case LinkInline link:
-                    return link.SelectMany(x => CreateSpans(x, family, attributes, this.Theme.Link.ForegroundColor, backgroundColor, size)).ToArray();
+
+                    if(link.IsImage)
+                    {
+                        queuedViews.Add(new Image()
+                        {
+                            Source = link.Url,
+                        });
+                        return new Span[0];
+                    }
+                    else
+                    {
+                        return link.SelectMany(x => CreateSpans(x, family, attributes, this.Theme.Link.ForegroundColor, backgroundColor, size)).ToArray();
+                    }
 
                 case CodeInline code:
-                    return new[] 
+                    return new[]
                     {
                         new Span
                         {
@@ -341,9 +366,9 @@
                             FontAttributes = this.Theme.Code.Attributes,
                             FontSize = size,
                             FontFamily = this.Theme.Code.FontFamily,
-                            ForegroundColor = this.Theme.Code.ForegroundColor, 
-                            BackgroundColor = this.Theme.Code.BackgroundColor 
-                        } 
+                            ForegroundColor = this.Theme.Code.ForegroundColor,
+                            BackgroundColor = this.Theme.Code.BackgroundColor
+                        }
                     };
 
 
@@ -352,5 +377,7 @@
                     return null;
             }
         }
+
+        #endregion
     }
 }
