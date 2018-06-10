@@ -412,6 +412,7 @@
                             ForegroundColor = foregroundColor,
                             BackgroundColor = backgroundColor,
                             FontSize = size,
+                            FontFamily = family,
                         }
                     };
 
@@ -449,7 +450,7 @@
                     }
                     else
                     {
-                        var spans = link.SelectMany(x => CreateSpans(x, family, attributes, this.Theme.Link.ForegroundColor, backgroundColor, size)).ToArray();
+                        var spans = link.SelectMany(x => CreateSpans(x, this.Theme.Link.FontFamily ?? family, this.Theme.Link.Attributes, this.Theme.Link.ForegroundColor, this.Theme.Link.BackgroundColor, size)).ToArray();
                         links.Add(new KeyValuePair<string, string>(string.Join("",spans.Select(x => x.Text)), url));
                         return spans;
                     }
