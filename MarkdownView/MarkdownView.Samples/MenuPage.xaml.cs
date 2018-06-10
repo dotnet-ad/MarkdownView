@@ -32,6 +32,11 @@ namespace MarkdownView.Samples
             this.BindingContext = this;
         }
 
+        void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+            MessagingCenter.Send(this, "theme", e.Value ? "dark" : "light");
+        }
+
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as Item;

@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MarkdownView.Samples.MenuPage">
 	<ListView ItemsSource="{Binding Items}" ItemSelected="Handle_ItemSelected">
         <ListView.Header>
-
-            <StackLayout Margin="0,30,0,0">
+                
+            <StackLayout Margin="0,50,0,0">
+                <Switch Toggled="Handle_Toggled" />
             </StackLayout>
         </ListView.Header>
         <ListView.ItemTemplate>

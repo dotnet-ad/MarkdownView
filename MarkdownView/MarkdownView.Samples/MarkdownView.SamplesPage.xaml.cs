@@ -2,6 +2,7 @@
 using System.Net;
 using System.IO;
 using System.Linq;
+using Markdown;
 
 namespace MarkdownView.Samples
 {
@@ -16,6 +17,10 @@ namespace MarkdownView.Samples
             mdView.RelativeUrlHost = "";
             this.Content = new ScrollView() { Content = mdView };
 
+            MessagingCenter.Subscribe<MenuPage, string>(this, "theme", (s, arg) =>
+            {
+                mdView.Theme = arg == "dark" ? (MarkdownTheme)new DarkMarkdownTheme() : new LightMarkdownTheme();
+            });
 
             MessagingCenter.Subscribe<MenuPage, string>(this, "new_md", async (s, arg) => {
                 if(arg == "")

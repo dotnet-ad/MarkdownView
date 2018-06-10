@@ -57,6 +57,8 @@
         {
             stack = new StackLayout();
 
+            this.BackgroundColor = this.Theme.BackgroundColor;
+
             if(!string.IsNullOrEmpty(this.Markdown))
             {
                 var parsed = Markdig.Markdown.Parse(this.Markdown);
