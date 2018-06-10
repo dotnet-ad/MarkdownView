@@ -14,13 +14,23 @@
     <copyright>Copyright 2017</copyright>
     <tags>xamarin ios android md markdown native</tags>
     <dependencies>
-        <dependency id="SkiaSharp.Svg" version="1.59.0" />
-        <dependency id="Xamarin.Forms" version="2.3.4.270" />
-        <dependency id="Markdig" version="0.13.2" />
+        <group>
+            <dependency id="SkiaSharp.Svg" version="1.59.0" />
+            <dependency id="Markdig" version="0.13.2" />
+        </group>
+        <group targetFramework="portable-net45+win8+wpa81+wp8">
+            <dependency id="Xamarin.Forms" version="2.3.4.270" />
+        </group>
+        <group targetFramework="netstandard1.0">
+            <dependency id="Xamarin.Forms" version="2.4.0.266-pre1" />
+        </group>
     </dependencies>
   </metadata>
    <files>
      <!-- PCL -->
-     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable-net45+win8+wpa81+wp8\Xam.Forms..dll"/>
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\portable-net45+win8+wpa81+wp8\Xam.Forms.MarkdownView.dll"/>
+
+     <!-- NETStandard -->
+     <file src="..\Sources\MarkdownView.Portable\bin\Release\MarkdownView.dll" target="lib\netstandard1.0\Xam.Forms.MarkdownView.dll"/>
    </files>
 </package>
