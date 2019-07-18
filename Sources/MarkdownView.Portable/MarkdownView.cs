@@ -1,4 +1,4 @@
-﻿namespace Xam.Forms.Markdown
+namespace Xam.Forms.Markdown
 {
     using System.Linq;
     using Markdig.Syntax;
@@ -426,7 +426,7 @@
 
                     var url = link.Url;
 
-                    if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                    if (!(url.StartsWith("http://") || url.StartsWith("https://") || url.StartsWith("mailto:")))
                     {
                         url = $"{this.RelativeUrlHost?.TrimEnd('/')}/{url.TrimStart('/')}";
                     }
