@@ -17,7 +17,5 @@
         public float BorderSize { get; set; }
 
         public string FontFamily { get; set; }
-
-        public bool AsBoxView { get; set; } = true;
     }
 }

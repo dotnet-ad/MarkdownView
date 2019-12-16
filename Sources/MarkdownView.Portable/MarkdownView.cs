@@ -226,28 +226,14 @@
             }
             else
             {
-                if (this.Theme.Paragraph.AsBoxView)
+                bullet = new BoxView
                 {
-                    bullet = new BoxView
-                    {
-                        WidthRequest = 4,
-                        HeightRequest = 4,
-                        Margin = new Thickness(0, 6, 0, 0),
-                        BackgroundColor = this.Theme.Paragraph.ForegroundColor,
-                        VerticalOptions = LayoutOptions.Start,
-                        HorizontalOptions = LayoutOptions.Center,
-                    };
-                }
-                else
-                {
-                    bullet = new Label
-                    {
-                        Text = $"●",
-                        FontSize = this.Theme.Paragraph.FontSize,
-                        TextColor = this.Theme.Paragraph.ForegroundColor,
-                        VerticalOptions = LayoutOptions.Start,
-                        HorizontalOptions = LayoutOptions.End,
-                    };
+                    WidthRequest = 4,
+                    HeightRequest = 4,
+                    Margin = new Thickness(0, 6, 0, 0),
+                    BackgroundColor = this.Theme.Paragraph.ForegroundColor,
+                    VerticalOptions = LayoutOptions.Start,
+                    HorizontalOptions = LayoutOptions.Center,
                 };
             }
 
