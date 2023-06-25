@@ -1,6 +1,6 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xam.Forms.MarkdownView", "MarkdownView.Portable\Xam.Forms.MarkdownView.csproj", "{17728834-C586-4C2E-A1D7-F2E7AD1E1FBF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{BD895E94-AF92-409F-8D79-A5DAD7556CC0}"
