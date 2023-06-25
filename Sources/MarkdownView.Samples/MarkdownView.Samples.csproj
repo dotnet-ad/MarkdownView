@@ -4,14 +4,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-    
+
   <ItemGroup>
     <ProjectReference Include="..\MarkdownView.Portable\Xam.Forms.MarkdownView.csproj" />
   </ItemGroup>
-    
+
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +35,5 @@
     <EmbeddedResource Update="MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-    
-  <ItemGroup>
-    <None Remove="NETStandard.Library" />
   </ItemGroup>
 </Project>

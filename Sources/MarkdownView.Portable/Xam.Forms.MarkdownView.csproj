@@ -22,15 +22,9 @@
     <PackageLicenseUrl>https://github.com/Reality-Check-Inc/MarkdownView/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Reality-Check-Inc/MarkdownView</PackageProjectUrl>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Markdig" Version="0.31.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="NETStandard.Library" />
   </ItemGroup>
 </Project>
