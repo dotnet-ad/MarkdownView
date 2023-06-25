@@ -11,6 +11,7 @@
     <AssemblyName>MarkdownView.Samples.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>

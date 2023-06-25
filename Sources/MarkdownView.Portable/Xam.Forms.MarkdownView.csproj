@@ -2,17 +2,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Native markdown rendering for Xamarin.Forms. Updated in 2023 to newer nugets.</Description>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <AssemblyFileVersion>0.0.0.0</AssemblyFileVersion>
     <Version>0.0.0.0</Version>
-    <PackageVersion>0.0.0.0</PackageVersion>
+    <PackageVersion>0.5.2</PackageVersion>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Authors>Aloïs Deniel</Authors>
-    <PackageId>Xam.Forms.MarkdownView</PackageId>
+    <Authors>Aloïs Deniel, David N. Junod</Authors>
+    <PackageId>Xam.Forms.MarkdownView.RCI</PackageId>
     <Title>MarkdownView for Xamarin.Forms</Title>
-    <Summary>Native markdown rendering for Xamarin.Forms.</Summary>
+    <Summary>Native markdown rendering for Xamarin.Forms. Updated in 2023 to newer nugets.</Summary>
     <Description>Native markdown rendering for Xamarin.Forms.</Description>
     <PackageTags>xamarin, ios, android, uwp, windows, md, markdown, native</PackageTags>
     <Owners>David N. Junod</Owners>
