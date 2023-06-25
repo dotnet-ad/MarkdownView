@@ -3,14 +3,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
   </PropertyGroup>
-    
+
   <ItemGroup>
     <ProjectReference Include="..\MarkdownView.Portable\Xam.Forms.MarkdownView.csproj" />
   </ItemGroup>
-    
+
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.530893" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,5 +37,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-    
 </Project>

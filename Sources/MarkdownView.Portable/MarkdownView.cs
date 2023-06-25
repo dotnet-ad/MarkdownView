@@ -116,6 +116,7 @@
 
         private void Render(Block block)
         {
+            Debug.WriteLine($"Render {block.GetType()}");
             switch (block)
             {
                 case HeadingBlock heading:
@@ -147,7 +148,7 @@
                     break;
 
                 default:
-                    Debug.WriteLine($"Can't render {block.GetType()} blocks.");
+                    Debug.WriteLine($"Can't render {block.GetType()} blocks [150].");
                     break;
             }
 
@@ -485,7 +486,7 @@
                     };
 
                 default:
-                    Debug.WriteLine($"Can't render {inline.GetType()} inlines.");
+                    Debug.WriteLine($"Can't render {inline.GetType()} inlines [488].");
                     return null;
             }
         }

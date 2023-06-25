@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Native markdown rendering for Xamarin.Forms. Updated in 2023 to newer nugets.</Description>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
   </PropertyGroup>
-
   <PropertyGroup>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <AssemblyFileVersion>0.0.0.0</AssemblyFileVersion>
     <Version>0.0.0.0</Version>
-    <PackageVersion>0.0.0.0</PackageVersion>
+    <PackageVersion>0.5.2</PackageVersion>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Authors>Aloïs Deniel</Authors>
-    <PackageId>Xam.Forms.MarkdownView</PackageId>
+    <Authors>Aloïs Deniel, David N. Junod</Authors>
+    <PackageId>Xam.Forms.MarkdownView.RCI</PackageId>
     <Title>MarkdownView for Xamarin.Forms</Title>
-    <Summary>Native markdown rendering for Xamarin.Forms.</Summary>
+    <Summary>Native markdown rendering for Xamarin.Forms. Updated in 2023 to newer nugets.</Summary>
     <Description>Native markdown rendering for Xamarin.Forms.</Description>
-    <PackageTags>xamarin, ios, android, md, markdown, native</PackageTags>
-    <Owners>Aloïs Deniel</Owners>
+    <PackageTags>xamarin, ios, android, uwp, windows, md, markdown, native</PackageTags>
+    <Owners>David N. Junod</Owners>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageIconUrl>https://raw.githubusercontent.com/aloisdeniel/MarkdownView/master/Documentation/Logo.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/aloisdeniel/MarkdownView/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/aloisdeniel/MarkdownView</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Reality-Check-Inc/MarkdownView/master/Documentation/Logo.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/Reality-Check-Inc/MarkdownView/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Reality-Check-Inc/MarkdownView</PackageProjectUrl>
   </PropertyGroup>
-    
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.530893" />
-    <PackageReference Include="Markdig" Version="0.15.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+    <PackageReference Include="Markdig" Version="0.31.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
   </ItemGroup>
-    
 </Project>
